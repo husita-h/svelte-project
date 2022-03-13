@@ -2,7 +2,7 @@
     import { Router, Link } from "svelte-routing";
 </script>
 
-<header>
+<header class="bg-primary-300">
     <Router>
         <nav>
             <Link to="/">Home</Link>
