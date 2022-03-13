@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { userId } from "../store.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,8 +33,8 @@ export const signInWithGoogle = (() => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        setUserUid(user);
         // ...
-        console.log(result)
     }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -44,4 +45,9 @@ export const signInWithGoogle = (() => {
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
     });
-}) 
+})
+
+// userIdをログインが成功したら、返却された`uid`をstoreにセットする関数
+const setUserUid = ((v)=>{
+    userId.set(v.uid)
+})

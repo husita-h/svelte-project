@@ -1,6 +1,13 @@
 <script>
     import { Router, Link } from "svelte-routing";
     import { signInWithGoogle } from "../helpers/firebase.js";
+    import { userId } from "../store.js";
+
+    let uid;
+    userId.subscribe((id)=>{
+        uid = id;
+    })
+
     export let open;
 </script>
 
