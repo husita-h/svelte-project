@@ -17,9 +17,13 @@ const firebaseConfig = {
   measurementId: MEASUREMENT_ID
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
-// これMenuコンポーネントから使いたいため、exportする
+// Menuコンポーネントから使いたいため、exportする
 export const signInWithGoogle = (() => {
     signInWithPopup(auth, provider)
     .then((result) => {
@@ -41,8 +45,3 @@ export const signInWithGoogle = (() => {
         // ...
     });
 }) 
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const provider = new GoogleAuthProvider();
