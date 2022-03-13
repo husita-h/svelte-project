@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { userId } from "../store.js";
+import Cookies from 'js-cookie';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,10 +33,9 @@ export const signInWithGoogle = (() => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        setUserUid(user);
         // ...
+        setUidInStore(result);
+        setUidInCookie(result);
     }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -47,7 +48,13 @@ export const signInWithGoogle = (() => {
     });
 })
 
-// userIdをログインが成功したら、返却された`uid`をstoreにセットする関数
-const setUserUid = ((v)=>{
-    userId.set(v.uid)
+// ログインが成功したら、返却された`uid`をstoreにセットする関数
+const setUidInStore = ((r)=>{
+    userId.set(r.user.uid)
+})
+
+// ログインが成功したら、返却された`uid`をstoreにセットする関数
+// https://github.com/js-cookie/js-cookie
+const setUidInCookie = ((r)=>{
+    Cookies.set('uid', r.user.uid, { expires: 1 });
 })
