@@ -1,5 +1,6 @@
 <script>
     import { Router, Link } from "svelte-routing";
+    import Menu from "./Menu.svelte";
     // 参考: https://www.npmjs.com/package/svelte-hamburgers
     import Hamburger from 'svelte-hamburgers';
     let open;
@@ -13,14 +14,7 @@
 </svelte:head>
 
 <header class="bg-primary-300">
-    <Router>
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="about">About</Link>
-            <Link to="create">Create</Link>
-        </nav>
-    </Router>
     <Hamburger bind:open --color="white"/>
+    <Menu bind:open/>
 </header>
-
 
