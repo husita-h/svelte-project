@@ -1,6 +1,6 @@
 <script>
 	export const url = "";
-	import { Router, Link, Route } from "svelte-routing";
+	import { Router, Route } from "svelte-routing";
 	import Header from "./components/Header.svelte";
 	import Footer from "./components/Footer.svelte";
 	import Home from "./components/Home.svelte";
@@ -12,11 +12,6 @@
 <main>
 	<Header/>
 	<Router url="{url}">
-		<nav>
-			<Link to="/">Home</Link>
-			<Link to="about">About</Link>
-			<Link to="create">Create</Link>
-		</nav>
 		<div>
 			<Route path="diary/:id" component="{Diary}"/>
 			<Route path="create" component="{Create}"/>
