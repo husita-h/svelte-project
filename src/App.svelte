@@ -9,6 +9,7 @@
 	import Create from "./components/Create.svelte";
 	import Diary from "./components/Diary.svelte";
 	import Test from "./components/Test.svelte";
+	import "./helpers/firebase.js";
 
 	const testButton = (() => {
 		console.log("テストボタンが押されました");
