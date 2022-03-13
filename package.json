@@ -23,6 +23,7 @@
     "dotenv": "^16.0.0",
     "firebase": "^9.6.8",
     "firebase-tools": "^10.2.2",
+    "js-cookie": "^3.0.1",
     "sirv-cli": "^2.0.0",
     "smelte": "^1.1.8",
     "svelte-hamburgers": "^3.0.1",
