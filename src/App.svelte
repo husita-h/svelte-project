@@ -11,7 +11,7 @@
 	import Test from "./components/Test.svelte";
 </script>
 
-<main>
+<main class="bg-background-500">
 	<Header/>
 	<Router url="{url}">
 		<div>

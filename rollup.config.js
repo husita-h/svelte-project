@@ -51,9 +51,13 @@ export default {
 			whitelist: [], // Array of classnames whitelisted from purging
 			whitelistPatterns: [], // Same as above, but list of regexes
 			tailwind: { 
+				// 参考：https://colorhunt.co/palette/1c658c398ab9d8d2cbeeeeee
 				colors: { 
-					primary: "#b027b0",
-					secondary: "#009688",
+					primary: "#1C658C",
+					secondary: "#398AB9",
+					accent: "#D8D2CB",
+					background: "#EEEEEE",
+					white: "#FFFFFF",
 					error: "#f44336",
 					success: "#4caf50",
 					alert: "#ff9800",
