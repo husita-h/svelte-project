@@ -9,6 +9,12 @@
 	import Create from "./components/Create.svelte";
 	import Diary from "./components/Diary.svelte";
 	import Test from "./components/Test.svelte";
+
+	const testButton = (() => {
+		console.log("テストボタンが押されました");
+	})
+	console.log("`src/components/Test.svelte`が押下されています")
+
 </script>
 
 <main class="bg-background-500">
@@ -21,7 +27,7 @@
 			<Route path="/"><Home/></Route>
 		</div>
 	</Router>
-	<Test/>
+	<Test on:click={testButton}/>
 	<Footer/>
 </main>
 
