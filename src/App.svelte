@@ -8,6 +8,7 @@
 	import About from "./components/About.svelte";
 	import Create from "./components/Create.svelte";
 	import Diary from "./components/Diary.svelte";
+	import Test from "./components/Test.svelte";
 </script>
 
 <main>
@@ -20,6 +21,7 @@
 			<Route path="/"><Home/></Route>
 		</div>
 	</Router>
+	<Test/>
 	<Footer/>
 </main>
 
