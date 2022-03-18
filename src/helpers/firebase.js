@@ -56,7 +56,7 @@ export const signInWithGoogle = (() => {
 export const signOutForGoogle = (() => {
     signOut(auth)
     .then((result) => {
-        deleteUid();
+        deleteUidCookie();
         console.log("ログアウトに成功しました" + result);
     }).catch((error) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
