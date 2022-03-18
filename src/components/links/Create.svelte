@@ -11,8 +11,8 @@
 
 <h3>Create</h3>
 <div>{value}</div>
-<!-- bund:valueで、valueの値を動的に取得、反映 -->
-<form on:submit={sendForm}|preventDefault={submit}>
+<!-- bind:valueで、valueの値を動的に取得、反映 -->
+<form on:submit|preventDefault={sendForm}>
     <Slider min="0" max="100" bind:value {disabled} />
     <TextField label="Test label" textarea hint="Put your message" min="1" max="100"/>
     <Button small type="submit">Send</Button>
