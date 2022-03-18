@@ -35,8 +35,8 @@ export const signInWithGoogle = (() => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        setUidInStore(result);
-        setUidInCookie(result);
+        setUidStore(result);
+        setUidCookie(result);
         console.log("ログインに成功しました" + result);
     }).catch((error) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
@@ -71,21 +71,21 @@ export const signOutForGoogle = (() => {
 })
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
-const setUidInStore = ((r) => {
+function setUidStore(r) {
     userId.set(r.user.uid)
-})
+};
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
 // https://github.com/js-cookie/js-cookie
-const setUidInCookie = ((r) => {
+function setUidCookie(r) {
     Cookies.set('uid', r.user.uid, { expires: 1 });
-})
+};
 
 // ログアウトに成功したら、storeとcookieにある`uid`を削除する
-const deleteUid = (() => {
+function deleteUidCookie() {
     Cookies.remove('uid');
     // 画面を更新する
-    // `userId.set(null);`とする代わり
+    // `userId.set(null);`とせずとも、Storeからは値は消える
     document.location.reload();
-})
+};
 
