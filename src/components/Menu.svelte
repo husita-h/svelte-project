@@ -4,21 +4,27 @@
     import { signInWithGoogle, signOutForGoogle } from "../helpers/firebase.js";
     import { userId } from "../store.js";
 
+    export let open;
     let uid;
+
     const unsubscribe = userId.subscribe((id) => {
         uid = id;
     });
+    
     // コンポーネントを破棄したとき、サブスクライブを削除する
     // https://svelte.jp/docs#run-time-svelte-ondestroy
     onDestroy(() => {
         unsubscribe();
     })
 
-    export let open;
+    function falseOpen() {
+        open = false;
+    };
+
 </script>
 
 {#if open}
-    <nav>
+    <nav on:click={falseOpen}>
         <Router>
             {#if !uid}
             <Link to="#" on:click={signInWithGoogle}>Login</Link>
