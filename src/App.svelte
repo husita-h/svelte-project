@@ -14,7 +14,6 @@
 	const testButton = (() => {
 		console.log("テストボタンが押されました");
 	})
-	console.log("`src/components/Test.svelte`が押下されています")
 
 </script>
 
