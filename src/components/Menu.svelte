@@ -9,6 +9,7 @@
         uid = id;
     });
     // コンポーネントを破棄したとき、サブスクライブを削除する
+    // https://svelte.jp/docs#run-time-svelte-ondestroy
     onDestroy(() => {
         unsubscribe();
     })
@@ -19,13 +20,13 @@
 {#if open}
     <nav>
         <Router>
+            {#if !uid}
+            <Link to="#" on:click={signInWithGoogle}>Login</Link>
+            {:else}
             <Link to="/">Home</Link>
             <Link to="about">About</Link>
             <Link to="create">Create</Link>
-            {#if !uid}
-                <Link to="#" on:click={signInWithGoogle}>Login</Link>
-                {:else}
-                <Link to="#" on:click={signOutForGoogle}>Logout</Link>
+            <Link to="#" on:click={signOutForGoogle}>Logout</Link>
             {/if}
         </Router>
     </nav>
