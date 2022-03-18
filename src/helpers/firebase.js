@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { userId } from "../store.js";
 import Cookies from 'js-cookie';
 
@@ -26,35 +26,66 @@ const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+// ログイン
 // Menuコンポーネントから使いたいため、exportする
+// https://firebase.google.com/docs/auth/web/google-signin?hl=ja
 export const signInWithGoogle = (() => {
     signInWithPopup(auth, provider)
     .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        // ...
         setUidInStore(result);
         setUidInCookie(result);
+        console.log("ログインに成功しました" + result);
     }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+        console.log(
+            "errorCode:" + error.code + 
+            "errorMessage:" + error.message +
+            "email:" + error.email +
+            "credential:" + credential
+            );
+        console.log("ログインに失敗しました" + result);
+        alert("ログインに失敗しました。もう一度操作してください。エラーコード:" + error.code);
+    });
+})
+
+// ログアウト
+// https://firebase.google.com/docs/auth/web/google-signin?hl=ja#next_steps
+export const signOutForGoogle = (() => {
+    signOut(auth)
+    .then((result) => {
+        deleteUid();
+        console.log("ログアウトに成功しました" + result);
+    }).catch((error) => {
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(
+            "errorCode:" + error.code + 
+            "errorMessage:" + error.message +
+            "email:" + error.email +
+            "credential:" + credential
+        );
+        alert("ログアウトに失敗しました。もう一度操作してください。エラーコード:" + error.code);
     });
 })
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
-const setUidInStore = ((r)=>{
+const setUidInStore = ((r) => {
     userId.set(r.user.uid)
 })
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
 // https://github.com/js-cookie/js-cookie
-const setUidInCookie = ((r)=>{
+const setUidInCookie = ((r) => {
     Cookies.set('uid', r.user.uid, { expires: 1 });
 })
+
+// ログアウトに成功したら、storeとcookieにある`uid`を削除する
+const deleteUid = (() => {
+    Cookies.remove('uid');
+    // 画面を更新する
+    // `userId.set(null);`とする代わり
+    document.location.reload();
+})
+
