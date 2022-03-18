@@ -3,7 +3,6 @@
     import { TextField, Slider, Button } from "smelte";
     import { userId } from "../../store.js";
 
-    let disabled = false;
     let rate = 0;
     let formBody = 0;
     let uid;
@@ -27,7 +26,7 @@
 <div>{rate}</div>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
-    <Slider min="0" max="100" bind:value={rate} {disabled} />
+    <Slider min="0" max="100" bind:value={rate} />
     <TextField label="Test label" textarea hint="Put your message" min="1" max="100" bind:value={formBody}/>
     <Button small type="submit">Send</Button>
 </form>
