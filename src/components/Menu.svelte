@@ -1,11 +1,16 @@
 <script>
+    import { onDestroy } from "svelte";
     import { Router, Link } from "svelte-routing";
     import { signInWithGoogle, signOutForGoogle } from "../helpers/firebase.js";
     import { userId } from "../store.js";
 
     let uid;
-    userId.subscribe((id)=>{
+    const unsubscribe = userId.subscribe((id) => {
         uid = id;
+    });
+    // コンポーネントを破棄したとき、サブスクライブを削除する
+    onDestroy(() => {
+        unsubscribe();
     })
 
     export let open;
