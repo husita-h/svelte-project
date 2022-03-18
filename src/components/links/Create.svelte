@@ -1,20 +1,33 @@
 <script>
+    import { onDestroy } from "svelte";
     import { TextField, Slider, Button } from "smelte";
+    import { userId } from "../../store.js";
+
     let disabled = false;
-    // 初期値
-    let value = 0;
+    let rate = 0;
+    let formBody = 0;
+    let uid;
+    const unsubscribe = userId.subscribe((id) => {
+        uid = id;
+        console.log(uid)
+    });
+
+    // コンポーネントを破棄したとき、サブスクライブを削除する
+    // https://svelte.jp/docs#run-time-svelte-ondestroy
+    onDestroy(() => {
+        unsubscribe();
+    })
 
     function sendForm() {
-        console.log("submit!!!")
+        console.log("submit!!!" + "uid!!!" + uid + "rate!!!" + rate + "formBody!!!" + formBody)
     };
 </script>
 
 <h3>Create</h3>
-<div>{value}</div>
+<div>{rate}</div>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
-    <Slider min="0" max="100" bind:value {disabled} />
-    <TextField label="Test label" textarea hint="Put your message" min="1" max="100"/>
+    <Slider min="0" max="100" bind:value={rate} {disabled} />
+    <TextField label="Test label" textarea hint="Put your message" min="1" max="100" bind:value={formBody}/>
     <Button small type="submit">Send</Button>
 </form>
-<!-- <Button small type="submit">Send</Button> -->
