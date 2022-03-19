@@ -1,5 +1,4 @@
 <script>
-    import { Router, Link } from "svelte-routing";
     import Menu from "./Menu.svelte";
     // 参考: https://www.npmjs.com/package/svelte-hamburgers
     import Hamburger from 'svelte-hamburgers';
