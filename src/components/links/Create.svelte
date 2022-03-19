@@ -2,6 +2,7 @@
     import { onDestroy } from "svelte";
     import { TextField, Button } from "smelte";
     import { userId } from "../../store.js";
+    import { postTextForFirestore } from "../../helpers/firebase-firesotre.js"
 
     let count = 0;
     let text = null;
@@ -19,11 +20,12 @@
     })
 
     function sendForm() {
-        console.log("submit!!!" + "uid!!!" + uid + "rate!!!" + rate + "text!!!" + text)
+        console.log("submit!!!" + "uid!!!" + uid + "text!!!" + text)
+        postTextForFirestore(uid, text)
     };
 
-    function changeButtonState(v) {
-        if (v > 10){
+    function changeButtonState(_size) {
+        if (_size > 0){
             isDisabeled = false;
             return;
         }else {
@@ -59,6 +61,6 @@
     <Button
         disabled={isDisabeled}
         type="submit"
-        on:click={changeButtonState}
+        on:click={sendForm}
     >Send</Button>
 </form>
