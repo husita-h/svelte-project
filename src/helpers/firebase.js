@@ -1,9 +1,10 @@
 // Import the functions you need from the SDKs you need
-// Cloud Firestore を初期化する
-// https://firebase.google.com/docs/firestore/quickstart?hl=ja&authuser=0#initialize
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+// Cloud Firestore を初期化する
+// https://firebase.google.com/docs/firestore/quickstart?hl=ja&authuser=0#initialize
+import { getFirestore } from "firebase/firestore";
 import { userId } from "../store.js";
 import Cookies from 'js-cookie';
 
@@ -27,6 +28,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+const db = getFirestore();
 
 // ログイン
 // Menuコンポーネントから使いたいため、exportする
