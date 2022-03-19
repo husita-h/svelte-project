@@ -6,7 +6,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/
 // https://firebase.google.com/docs/firestore/quickstart?hl=ja&authuser=0#initialize
 import { getFirestore } from "firebase/firestore";
 import { userId } from "../store.js";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -76,18 +76,18 @@ export function signOutForGoogle() {
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
 function setUidStore(r) {
-    userId.set(r.user.uid)
+    userId.set(r.user.uid);
 };
 
 // ログインが成功したら、返却された`uid`をstoreにセットする関数
 // https://github.com/js-cookie/js-cookie
 function setUidCookie(r) {
-    Cookies.set('uid', r.user.uid, { expires: 1 });
+    Cookies.set("uid", r.user.uid, { expires: 1 });
 };
 
 // ログアウトに成功したら、storeとcookieにある`uid`を削除する
 function deleteUidCookie() {
-    Cookies.remove('uid');
+    Cookies.remove("uid");
     // 画面を更新する
     // `userId.set(null);`とせずとも、Storeからは値は消える
     document.location.reload();
