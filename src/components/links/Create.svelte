@@ -2,7 +2,7 @@
     import { onDestroy } from "svelte";
     import { TextField, Button } from "smelte";
     import { userId } from "../../store.js";
-    import { postTextForFirestore } from "../../helpers/firebase-firesotre.js"
+    import { postTextForFirestore } from "../../helpers/firebase-firestore.js"
 
     let count = 0;
     let text = null;
@@ -20,8 +20,13 @@
     })
 
     function sendForm() {
-        console.log("submit!!!" + "uid!!!" + uid + "text!!!" + text)
-        postTextForFirestore(uid, text)
+        console.log("submit!!!" + "uid!!!" + uid + "text!!!" + text);
+        const res = postTextForFirestore(uid, text);
+        if (res) {
+            alert("メッセージの保存に成功しました");
+        }else{
+            alert("メッセージの保存に失敗しました");
+        }
     };
 
     function changeButtonState(_size) {
@@ -61,6 +66,5 @@
     <Button
         disabled={isDisabeled}
         type="submit"
-        on:click={sendForm}
     >Send</Button>
 </form>
