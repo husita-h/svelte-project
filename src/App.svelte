@@ -8,13 +8,6 @@
 	import About from "./components/links/About.svelte";
 	import Create from "./components/links/Create.svelte";
 	import Diary from "./components/Diary.svelte";
-	import Test from "./components/Test.svelte";
-	import "./helpers/firebase.js";
-
-	const testButton = (() => {
-		console.log("テストボタンが押されました");
-	})
-
 </script>
 
 <main class="bg-background-500">
@@ -27,7 +20,6 @@
 			<Route path="/"><Home/></Route>
 		</div>
 	</Router>
-	<Test on:click={testButton}/>
 	<Footer/>
 </main>
 
