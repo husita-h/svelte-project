@@ -2,6 +2,7 @@
     import { onDestroy } from "svelte";
     import { TextField, Button } from "smelte";
     import { userId } from "../../store.js";
+    import { postTextForFirestore } from "../../helpers/firebase-firestore.js"
 
     let count = 0;
     let text = null;
@@ -19,11 +20,17 @@
     })
 
     function sendForm() {
-        console.log("submit!!!" + "uid!!!" + uid + "rate!!!" + rate + "text!!!" + text)
+        console.log("submit!!!" + "uid!!!" + uid + "text!!!" + text);
+        const res = postTextForFirestore(uid, text);
+        if (res) {
+            alert("メッセージの保存に成功しました");
+        }else{
+            alert("メッセージの保存に失敗しました");
+        }
     };
 
-    function changeButtonState(v) {
-        if (v > 10){
+    function changeButtonState(_size) {
+        if (_size > 0){
             isDisabeled = false;
             return;
         }else {
@@ -45,7 +52,6 @@
 <h4>{count}</h4>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
-    <!-- <Slider min="0" max="100" bind:value={textLength} /> -->
     <TextField
         id="textBox"
         label="Test label"
@@ -59,6 +65,5 @@
     <Button
         disabled={isDisabeled}
         type="submit"
-        on:click={changeButtonState}
     >Send</Button>
 </form>
