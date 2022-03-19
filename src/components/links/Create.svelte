@@ -50,7 +50,7 @@
 </script>
 
 <h3>Create</h3>
-<h4>{count}</h4>
+<div>残りの入力文字数{count}</div>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
     <TextField
