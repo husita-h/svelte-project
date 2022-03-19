@@ -14,5 +14,8 @@ Then, from within your project folder:
 
 ```bash
 npm run build
-surge public my-project.surge.sh
+```
+or
+```bash
+sh start.sh
 ```
