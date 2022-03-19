@@ -28,7 +28,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-const db = getFirestore();
+export const db = getFirestore();
 
 // ログイン
 // Menuコンポーネントから使いたいため、exportする
