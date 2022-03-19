@@ -52,7 +52,6 @@
 <h4>{count}</h4>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
-    <!-- <Slider min="0" max="100" bind:value={textLength} /> -->
     <TextField
         id="textBox"
         label="Test label"
