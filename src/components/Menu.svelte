@@ -10,7 +10,7 @@
     const unsubscribe = userId.subscribe((id) => {
         uid = id;
     });
-    
+
     // コンポーネントを破棄したとき、サブスクライブを削除する
     // https://svelte.jp/docs#run-time-svelte-ondestroy
     onDestroy(() => {
@@ -36,7 +36,6 @@
             {/if}
         </Router>
     </nav>
-    <!-- <hr transition:scale={{ duration: 750, easing: quadOut, opacity: 1 }} /> -->
 {/if}
 
 <style>
