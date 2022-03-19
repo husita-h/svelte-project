@@ -1,4 +1,6 @@
 // Import the functions you need from the SDKs you need
+// Cloud Firestore を初期化する
+// https://firebase.google.com/docs/firestore/quickstart?hl=ja&authuser=0#initialize
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
