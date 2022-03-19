@@ -24,6 +24,7 @@
         const res = postTextForFirestore(uid, text);
         if (res) {
             alert("メッセージの保存に成功しました");
+            text = null;
         }else{
             alert("メッセージの保存に失敗しました");
         }
