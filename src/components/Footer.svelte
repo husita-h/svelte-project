@@ -2,4 +2,4 @@
 
 </script>
 
-<footer class="bg-primary-300">svelte-app</footer>
+<footer class="bg-primary-300">フッター</footer>

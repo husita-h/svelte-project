@@ -20,6 +20,7 @@
     })
 
     function sendForm() {
+        console.log("submit!!!" + "uid!!!" + uid + "text!!!" + text);
         const res = postTextForFirestore(uid, text);
         if (res) {
             alert("メッセージの保存に成功しました");
@@ -42,13 +43,14 @@
     function countLength() {
         let _input = document.getElementById("textBox");
         count = _input.value.length
+        console.log("count" + count);
         changeButtonState(count);
     }
 
 </script>
 
 <h3>Create</h3>
-<div>残りの入力文字数{100 - count}</div>
+<h4>{count}</h4>
 <!-- bind:valueで、valueの値を動的に取得、反映 -->
 <form on:submit|preventDefault={sendForm}>
     <TextField

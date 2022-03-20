@@ -42,16 +42,15 @@ export function signInWithGoogle() {
         setUidStore(result);
         setUidCookie(result);
         console.log("ログインに成功しました" + result);
-        alert("ログインに成功しました。");
     }).catch((error) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log(
-            "ログインに失敗しました" +
             "errorCode:" + error.code + 
             "errorMessage:" + error.message +
             "email:" + error.email +
             "credential:" + credential
             );
+        console.log("ログインに失敗しました" + result);
         alert("ログインに失敗しました。もう一度操作してください。エラーコード:" + error.code);
     });
 }
@@ -66,7 +65,6 @@ export function signOutForGoogle() {
     }).catch((error) => {
         const credential = GoogleAuthProvider.credentialFromError(error);
         console.log(
-            "ログアウトに失敗しました" +
             "errorCode:" + error.code + 
             "errorMessage:" + error.message +
             "email:" + error.email +

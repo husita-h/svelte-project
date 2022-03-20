@@ -7,14 +7,14 @@
 	import Home from "./components/links/Home.svelte";
 	import About from "./components/links/About.svelte";
 	import Create from "./components/links/Create.svelte";
-	import Memo from "./components/Memo.svelte";
+	import Diary from "./components/Diary.svelte";
 </script>
 
 <main class="bg-background-500">
 	<Header/>
 	<Router url="{url}">
 		<div>
-			<Route path="memo/:id" component="{Memo}"/>
+			<Route path="diary/:id" component="{Diary}"/>
 			<Route path="create" component="{Create}"/>
 			<Route path="about" component="{About}"/>
 			<Route path="/"><Home/></Route>
