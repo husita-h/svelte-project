@@ -1,23 +1,33 @@
 <script>
-    import { onDestroy } from "svelte";
+    import { onMount, onDestroy } from "svelte";
     import { TextField, Button } from "smelte";
-    import { userId } from "../../store.js";
+    import { userId, docId } from "../../store.js";
     import { postTextForFirestore, getTextAtFireStore, delteTextAtFireStore } from "../../helpers/firebase-firestore.js"
 
     let count = 0;
     let text = null;
     let isDisabeledSubmit = true;
     let isDisabeledFetch = false;
-    let uid;
-    const unsubscribe = userId.subscribe((id) => {
-        uid = id;
-        console.log(uid)
+    let uid = null;
+    let doc = null;
+    const unsubscribeUserId = userId.subscribe((_id) => {
+        uid = _id;
+        console.log(uid);
+    });
+    const unsubscribeDocId = docId.subscribe((_result) => {
+        doc = _result;
+        console.log(doc);
     });
 
     // コンポーネントを破棄したとき、サブスクライブを削除する
     // https://svelte.jp/docs#run-time-svelte-ondestroy
     onDestroy(() => {
-        unsubscribe();
+        unsubscribeUserId;
+        unsubscribeDocId;
+    })
+
+    onMount(() => {
+        displayList();
     })
 
     // =====Create=====
@@ -48,7 +58,7 @@
     }
 
     // =====Fetch=====
-    async function displayList () {
+    async function displayList() {
         let res = await getTextAtFireStore();
         if (res) {
             putInTextArr(res);
@@ -60,7 +70,7 @@
         }
     }
     
-    function putInTextArr (arr) {
+    function putInTextArr(arr) {
         let html_list_tag = null;
         html_list_tag = document.getElementById("textList");
         arr.forEach((element) => {
@@ -71,7 +81,7 @@
         return;
     }
     
-    function changeForFetchButtonState (){
+    function changeForFetchButtonState(){
         isDisabeledFetch = true;
         return;
     }
@@ -120,6 +130,7 @@
 </form>
 
 <ul id="textList">メッセージ</ul>
+
 <div>同期ボタン</div>
 <Button on:click={displayList} disabled={isDisabeledFetch}>Fetch</Button>
 <div>削除ボタン</div>
