@@ -42,7 +42,6 @@
     function countLength() {
         let _input = document.getElementById("textBox");
         count = _input.value.length
-        console.log("count" + count);
         changeButtonState(count);
     }
 

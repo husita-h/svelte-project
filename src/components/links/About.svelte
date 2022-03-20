@@ -2,11 +2,14 @@
     import { Button } from "smelte";
     import { getTextAtFireStore } from "../../helpers/firebase-firestore.js"
 
+    let isDisabeled = false;
+
     async function displayList () {
         let res = await getTextAtFireStore();
         console.log("each回す前のres", res);
         if (res) {
             putInTextArr(res);
+            changeForFetchButtonState();
             return;
         }else{
             alert("ドキュメントの取得に失敗しました。")
@@ -26,19 +29,31 @@
         return;
     }
 
-    // function deleteButton (){
+    function changeForFetchButtonState (){
+        isDisabeled = true;
+        return;
+    }
 
-    // }
+    function deleteButton (){
+        // 削除の処理を追加する?
+        // ボタンの状態を戻すため、リロード
+        document.location.reload();
+    }
+    
+    function deleteButtonCompletely () {
+        // 削除の処理を追加する
+        // ボタンの状態を戻すため、リロード
+        document.location.reload();
 
-    // function deleteButtonCompletely () {
-
-    // }
+    }
 
 </script>
 
 <h3>About</h3>
 <ul id="textList">メッセージ</ul>
 <div>同期ボタン</div>
-<Button on:click={displayList}>Fetch</Button>
-<!-- <Button on:click={deleteButton}>Delete</Button>
-<Button on:click={deleteButtonCompletely}>DeleteCompletely</Button> -->
+<Button on:click={displayList} disabled={isDisabeled}>Fetch</Button>
+<div>削除ボタン</div>
+<Button on:click={deleteButton}>Delete</Button>
+<div>削除ボタン※DBからも削除</div>
+<Button on:click={deleteButtonCompletely}>DeleteCompletely</Button>
