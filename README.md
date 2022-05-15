@@ -4,7 +4,7 @@ This is a project template for [Svelte](https://svelte.dev) apps. It lives at ht
 
 ## Get started
 
-```bash
+```sh
 npm run dev
 ```
 
